@@ -18,6 +18,10 @@ namespace Task6
 
             beruf.Subscribe(x => Console.WriteLine($"Bezeichnung: {x.Bezeichnung}; Jahresgehalt: {x.JahresGehalt}"));
 
+            beruf.Where(x => x.JahresGehalt >= 10000)
+                .Where(x => x.JahresGehalt <= 100000)
+                .Subscribe(x => Console.WriteLine($"Bezeichnung: {x.Bezeichnung}; Jahresgehalt zwischen 10000 und 100000: {x.JahresGehalt}"));
+
             //Console.WriteLine("------------- Ohne Filter -------------");
             for (var i = 1; i <= 50; i++)
             {
