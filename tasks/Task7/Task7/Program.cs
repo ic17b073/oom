@@ -15,19 +15,34 @@ namespace Task7
             List<IBeruf> jobs = new List<IBeruf>();            
             var createTask = CreateJobs(jobs);
             var calcTask = CalculateJobs(jobs);
-            
+
+            Task<string> a = Query();
+
+            Console.WriteLine("Start continuewith ...");
+
+            a.ContinueWith(t => Console.WriteLine("QUERY RESULT: {0}", t.Result));
+
             Console.WriteLine("doing something else ...");
             Console.ReadLine();            
         }
-                
+
+
+        public static Task<string> Query() {
+
+            Console.WriteLine("START QUERY TASK...");
+
+            Task.Delay(TimeSpan.FromSeconds(1.0)).Wait();
+
+            return new Task<string>( () => "----------- QUERY READY ------------");
+        }
 
         public static Task<bool> TimeOut()
         {
             return Task.Run(() =>
             {
-                for (var i = 0; i < 3; i++)
+                for (var i = 0; i < 2; i++)
                 {
-                    Task.Delay(TimeSpan.FromSeconds(1.0)).Wait();
+                    Task.Delay(TimeSpan.FromSeconds(0.5)).Wait();
                 }
 
                 return true;
